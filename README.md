@@ -3,7 +3,9 @@
 This repository includes the code to combine AWS ParallelCluster (https://github.com/aws/aws-parallelcluster), AWS API Gateway (https://aws.amazon.com/api-gateway/) and AWS Lambda (https://aws.amazon.com/lambda/) to make a serverless API of the ParallelCluster command line interface.
 
 **AWS ParallelCluster** simplifies the creation and the deployment of HPC clusters. 
+
 **AWS API Gateway** is a fully managed service that makes it easy for developers to create, publish, maintain, monitor, and secure APIs at any scale. 
+
 **AWS Lambda** automatically runs your code without requiring you to provision or manage servers.
 
 In HPC environments, the role of security is paramount because customers are performing scientific analyses that are central to the businesses in which they work. By using a serverless API, this solution makes it so that customers do not need to run the ParallelCluster CLI in a user’s environment. This offers customers an additional method to keep their environments secure and more easily control the IAM roles and security groups to which individual scientists or researchers need to have access to.
