@@ -1,11 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: >
-  sam-app
-
-  AWS ParallelCluster serverless API
-
-
+Description: AWS ParallelCluster serverless API
 Globals:
   Function:
     Timeout: 900
@@ -227,7 +222,7 @@ Resources:
           - logs:CreateLogGroup
           Resource: '*'          
       Events:
-        HelloWorld:
+        pCluster:
           Type: Api
           Properties:
             Path: /pcluster
@@ -237,9 +232,3 @@ Outputs:
   ParallelClusterApi:
     Description: "API Gateway endpoint URL for Prod stage for ParallelCluster function"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/pcluster/"
-  ParallelClusterFunction:
-    Description: "ParallelCluster Lambda Function ARN"
-    Value: !GetAtt ParallelClusterFunction.Arn
-  ParallelClusterFunctionIamRole:
-    Description: "Implicit IAM Role created for ParallelCluster function"
-    Value: !GetAtt ParallelClusterFunctionRole.Arn
