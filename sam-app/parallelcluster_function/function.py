@@ -5,6 +5,7 @@ import base64
 import os
 import io
 import contextlib
+import logging
 from pcluster import cli
 
 from io import StringIO
@@ -51,32 +52,24 @@ def lambda_handler(event, context):
       sys.argv.append(cluster_name)
       
     #execute the pcluster command
+    output = ''
     try:
+      pcluster_logger = logging.getLogger("pcluster")
+      pcluster_logger.propagate = False
       stdout = io.StringIO()
       stderr = io.StringIO()
       with contextlib.redirect_stdout(stdout), contextlib.redirect_stderr(stderr):
         cli.main()
       print("stdout:\n{}".format(stdout.getvalue()))
       print("stderr:\n{}".format(stderr.getvalue()))
-    except SystemExit:
+      output = stdout.getvalue() + '\n' + stderr.getvalue() + '\n'
+    except SystemExit as e:
       print("stdout:\n{}".format(stdout.getvalue()))
       print("stderr:\n{}".format(stderr.getvalue()))
-      
-    #retrieve the pcluster output
-    output_to_user = ""
-    previous_line = ""
-    #remove the lines that contain the [ character. Used to remove the parallelcluster debug lines
-    to_remove = ['[']
-    output = stdout.getvalue() + stderr.getvalue()
-    for line in output.splitlines():
-      print(line)
-      if not any(to_rem in line for to_rem in to_remove):
-        if line.strip():
-          if previous_line != line:
-            output_to_user = output_to_user + '\n' + line
-          previous_line = line
-    output_to_user = output_to_user + '\n'
+      print("exception: {}".format(e))
+      output = stdout.getvalue() + '\n' + stderr.getvalue() + '\n' + str(e) + '\n'
+        
     return {
         'statusCode': 200,
-        'body': output_to_user
+        'body': output
     }
