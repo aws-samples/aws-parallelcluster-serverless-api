@@ -14,6 +14,8 @@ The serverless integration of AWS ParallelCluster can also enable a cleaner and 
 
 Taking this serverless, infrastructure-as-code approach enables several new interesting pieces of functionality for HPC environments. One such use case would be the ability to build on-demand clusters from an API when on-premises resources are unable to handle the required workload. In this way ParallelCluster can, in serverless and scriptable fashion, extend on-premises resources for running elastic and large-scale HPC on AWS’ virtually unlimited infrastructure. Another possible use case could be the creation of an event-driven workflow in which new clusters are created as soon as new data is uploaded to an S3 bucket. With these kinds of event-driven workflows, you can be creative in finding new ways to build HPC infrastructure easily and in a way that makes the most of the scarcest resource in most HPC departments: researchers’ time.
 
+Blog post link: https://aws.amazon.com/blogs/compute/using-aws-parallelcluster-with-a-serverless-api/
+
 
 ## License
 
